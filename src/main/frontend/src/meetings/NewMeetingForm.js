@@ -9,8 +9,6 @@ export default function NewMeetingForm({onSubmit}) {
         onSubmit({title, description, participants: []});
     }
 
-
-
     return (
         <form onSubmit={submit}>
             <h3>Dodaj nowe spotkanie</h3>

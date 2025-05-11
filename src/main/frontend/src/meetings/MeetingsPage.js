@@ -13,6 +13,7 @@ export default function MeetingsPage({username}) {
             headers: { 'Content-Type': 'application/json' }
         });
         if (response.ok) {
+            const newMeeting = await response.json()
             const nextMeetings = [...meetings, meeting];
             setMeetings(nextMeetings);
             setAddingNewMeeting(false);

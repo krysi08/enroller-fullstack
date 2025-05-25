@@ -5,22 +5,22 @@ import MeetingsList from "./MeetingsList";
 export default function MeetingsPage({username}) {
     const [meetings, setMeetings] = useState([]);
     const [addingNewMeeting, setAddingNewMeeting] = useState(false);
+    const [addingParticipants, setAddingParticipants] = useState(false);
 
     async function handleNewMeeting(meeting) {
-        const response = await fetch('/api/meetings', {
+        const response = await fetch(`/api/meetings`, {
             method: 'POST',
             body: JSON.stringify(meeting),
             headers: { 'Content-Type': 'application/json' }
         });
         if (response.ok) {
-            const newMeeting = await response.json()
-            const nextMeetings = [...meetings, meeting];
+            const newMeetings = await response.json();
+            const nextMeetings = [...meetings, newMeetings];
             setMeetings(nextMeetings);
             setAddingNewMeeting(false);
         }
     }
 
-    //metoda ktora pobiera dane z bazy danych
     useEffect(() => {
         const fetchMeetings = async () => {
             const response = await fetch(`/api/meetings`);
@@ -41,6 +41,7 @@ export default function MeetingsPage({username}) {
             setMeetings(nextMeetings);
         }
     }
+
 
     return (
         <div>
